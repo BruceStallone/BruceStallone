@@ -3,7 +3,8 @@
 #2021-11-8 V1.2 识别链接文本，并增加<a href></a>标记
 #2021-11-9 V2.0 优化了代码结构
 #2021-11-10 V2.1 改了一处BUG
-
+#2021-11-22 V2.2 取消超链接<a href></a>标记
+#2021-12-2 V2.3  增加结束后的文案提示
 
 #引用python-docs库处理docx文件
 import docx
@@ -30,9 +31,6 @@ xi = {"title":"Anuncio"}
 for duanluo in gonggao.paragraphs:
 	run = duanluo.runs
 	for r in run:
-		#找出带https链接的文本，并标注<a href=""></a>
-		if "https:" in r.text:
-			r.text = f'<a href="{r.text}">{r.text}</a>'
 		#找出带颜色标记的部分，并为其标注<color></color>
 		if r.font.color.type == True:
 			r.text = f"<color=#ffc815>{r.text}</color>"
@@ -73,3 +71,4 @@ with open(file_path, "w",encoding = "utf-8") as f:
 #复制json文件，并且重命名为对应的公告配置文件
 for h in houzhui[1:]:
 	shutil.copyfile(file_path, f"{wenjianjia}/announcement4.json_{h}")
+print("=========================保存文档,转换格式，新建文件夹======================================")
